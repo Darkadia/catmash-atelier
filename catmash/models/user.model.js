@@ -81,7 +81,6 @@ UserSchema.statics = {
         throw(err);
       }
       users.forEach(function(user) {
-        console.log(user.vote.idCat);
         usersVotesCatId.push(user.vote.idCat);
       });
     });

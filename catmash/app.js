@@ -10,23 +10,23 @@ var glob = require('glob');
 var assets = require("./config/assets/default");
 var mongoose = require('./config/mongoose');
 
-
-// view engine setup
-
+//Init connection to MongoDb Database and models
+mongoose.initDb();
+mongoose.initModels();
 
 //Init all routes
 glob.sync(assets.routes).forEach( function( file ) {
   require(path.resolve(file));
 });
 
+//Init express framework
 var app = express();
 
+//View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-//Init connection to MongoDb Database and models
-mongoose.initDb();
-mongoose.initModels();
 
+//Init passport middleware (Authentification middleware)
 var passport = require("passport");
 require('./config/passport-strategies')(passport);
 app.use(passport.initialize());

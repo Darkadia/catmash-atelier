@@ -25,11 +25,9 @@ require('path').default;
    },
    votes: {
      upvotes: Number,
-     downVotes: Number
-   }
+     downvotes: Number
+    }
  });
-
-
 
  var Cat =  mongoose.model('Cat', CatsSchema);
  module.exports = Cat;

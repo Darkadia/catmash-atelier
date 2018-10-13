@@ -20,7 +20,6 @@ module.exports = {
   initModels : function (callback) {
       // Globbing model files
       glob.sync(assets.models).forEach( function( file ) {
-        console.log(file);
         require(path.resolve(file));
       });
       if (callback) callback();

@@ -2,6 +2,8 @@
 
 var bodyParser = require('body-parser');
 const configEnv = require('./../config/assets/default');
+var Cats = require('../models/cats.model.js');
+var User = require('../models/user.model.js');
 
 module.exports = {
   login : function(req, res, next) {
@@ -31,5 +33,16 @@ module.exports = {
         success: true,
         message: "User successfully disconnected"
       });
+  },
+
+  getVotedCats : function (req, res) {
+    var votedCats= [];
+    User.findById(req.user.id)
+    .then((err, user) => {
+      votedCats = user.getVotedCats();
+    }).catch((err) =>{
+      throw (err);
+    });
+    return res.status(200).json(votedCats);
   }
 };

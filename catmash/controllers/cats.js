@@ -48,12 +48,28 @@ module.exports = {
       }
     });
   },
+
   seedDb : async function (req, res) {
-    var jsonData = await module.exports.fetchCats()
-    
-    console.log(jsonData);
+    var jsonData = await module.exports.fetchCats();
+    var cats = [];
+    console.log("Ok très bien");
+    jsonData.images.forEach(function(catObj) {
+      var tempCat = new Cats();
+      tempCat.imgUrl = catObj.url,
+      tempCat.id = catObj.id;
+      tempCat.upvotes = 0;
+      tempCat.downvotes = 0;
+      cats.push(tempCat);
+    })
+    console.log("lenght of the json", cats.length);
+    Cats.insertMany(cats).then((err, info) => {
+      console.log("Cats updated in database");
+    }).catch((err) => {
+      throw err;
+    })
     return res.status(200).json(jsonData);
   },
+
   fetchCats : () => {
     var url = 'https://latelier.co/data/cats.json';
     var JsonResponse;
