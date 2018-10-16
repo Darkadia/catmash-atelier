@@ -1,0 +1,29 @@
+.catmashNav nav{
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+    display: inline;
+    overflow: hidden;
+}
+
+.catmashNav nav a {
+    color: #000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.catmashNav nav img {
+    float: left;
+}
+
+.catmashNav .active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.catmashNav h1 {
+    display: inline;
+    text-align: center;
+}
