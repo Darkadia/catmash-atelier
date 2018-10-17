@@ -1,3 +1,18 @@
+mat-card {
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+mat-icon {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+mat-card-actions {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .catmashVoteCard {
     padding-top: 50px;
 }
@@ -8,18 +23,9 @@
     margin-right: auto;
 }
 
-.cat-card mat-card-actions{
-    padding: 14px 16px;
-}
-
-
 .buttons-row button,
 .buttons-row a {
   margin-right: 15px;
-}
-
-mat-card {
-    border-radius: 10px;
 }
 
 .cat-card img {

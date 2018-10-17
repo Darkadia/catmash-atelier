@@ -15,7 +15,7 @@ require('path').default;
 module.exports = {
   listAll : function(req, res) {
     Cats.find({}, function (err, cats) {
-      return res.status(200).json({success: true, elements: cats});
+      return res.status(200).json(cats);
     });
   },
 

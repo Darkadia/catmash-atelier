@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var glob = require('glob');
+var cors = require('cors')
 
 //Config files
 var assets = require("./config/assets/default");
@@ -38,8 +39,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Enable CORS
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, authorization');
+  res.header('Access-Control-Expose-Headers', 'Authorization');
+
+  next();
+}
+app.use(allowCrossDomain);
+
 //Init routes index file
 require('./routes/index.route.js')(app);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

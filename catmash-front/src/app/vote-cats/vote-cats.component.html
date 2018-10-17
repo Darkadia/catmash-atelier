@@ -1,13 +1,13 @@
 <div style="text-align:center" class="catmashCard">
   <mat-card class="cat-card" style="text-align:center">
-      <img mat-card-image src="http://78.media.tumblr.com/tumblr_m82woaL5AD1rro1o5o1_1280.jpg" alt="Photo of a Shiba Inu">
+      <img mat-card-image *ngIf="selectedCat" src={{selectedCat?.imgUrl}} alt="Photo of {{selectedCat.id}}">
       <div class="buttons-row">
-      <mat-card-actions>        
-          <button mat-icon-button>
+      <mat-card-actions>
+        <button mat-icon-button color="primary" (click)="onSelect(true)">
               <mat-icon aria-label="Upvote Icon">arrow_upward</mat-icon>
           </button>
-          <button mat-icon-button>
-              <mat-icon aria-label="Upvote Icon">arrow_downward</mat-icon>
+          <button mat-icon-button color="warn" (click)="onSelect(false)">
+            <mat-icon aria-label="Upvote Icon">arrow_downward</mat-icon>
           </button>
       </mat-card-actions>
       </div>

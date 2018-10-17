@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { VoteCatsComponent } from './vote-cats/vote-cats.component';
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     ),
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
