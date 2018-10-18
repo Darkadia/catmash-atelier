@@ -12,19 +12,20 @@ const  passportJWT = require("passport-jwt"),
 
 module.exports = function(passport) {
 
-		passport.use(new JWTStrategy({
+	passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey   : config.jwtSecret,
         passReqToCallback: true
     },
-    function (jwtPayload, cb) {
-        return User.findOne({'email': jwtPayload})
-            .then(user => {
-            	return cb(null, user);
+    function (req, jwtPayload, done) {
+         return User.findOne({'email': jwtPayload}, function(err, user)  {
+				if (user){
+				 done(null, user);
+				}
             })
             .catch(err => {
                 console.log(err);
-                return cb(err);
+                done(err);
               });
     	     }
 		  ));

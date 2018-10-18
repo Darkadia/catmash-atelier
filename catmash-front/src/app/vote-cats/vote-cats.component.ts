@@ -20,19 +20,27 @@ export class VoteCatsComponent implements OnInit {
   constructor(private catService:CatsService, private dialog: MatDialog) { }
 
   ngOnInit() { 
+    this.updateCats()
+  }
+
+  updateCats(): void {
     this.catService.getCats()
     .subscribe(cats => {
-      this.cats = cats;
-      this.selectedCat = cats[0];
+      console.log(cats);
+      this.cats = cats["foundCats"];
+      this.selectedCat = this.cats[0];
     });
   }
 
   onSelect(vote: Boolean): void {
-    this.catService.voteCat(this.selectedCat)
+    this.catService.voteCat(this.selectedCat, vote)
     .subscribe(response => console.log(response));
-
-    this.i = this.i + 1;
-    this.selectedCat = this.cats[this.i];
+    if (this.i == this.cats.length){
+      this.updateCats();
+    }
+    else {
+      this.i = this.i + 1;
+      this.selectedCat = this.cats[this.i];
+    }
   }
-
 }

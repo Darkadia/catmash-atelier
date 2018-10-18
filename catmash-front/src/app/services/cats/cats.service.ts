@@ -14,11 +14,10 @@ export class CatsService {
 
   constructor(public http: HttpClient) {
     this.http = http;
-
   }
   
   getCats() : Observable<Cat[]>{
-    let authToken = localStorage.getItem('token');
+    let authToken = localStorage.getItem('authToken');
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json',
@@ -26,11 +25,11 @@ export class CatsService {
         'Authorization': `bearer ${authToken}`
       })
     };
-    return  this.http.get<Cat[]>(this.apiUrl + "/api/cats/list", {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
+    return  this.http.get<Cat[]>(this.apiUrl + "/api/cats/update", httpOptions);
    }
 
-   voteCat(cat: Cat) : any {
-    let authToken = localStorage.getItem('token');
+   voteCat(cat: Cat, userVote: Boolean) : any {
+    let authToken = localStorage.getItem('authToken');
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json',
@@ -38,7 +37,7 @@ export class CatsService {
         'Authorization': `bearer ${authToken}`
       })
     };
-    return this.http.post<Cat>(this.apiUrl + "/api/cats/" + cat.id , cat, httpOptions)
+    return this.http.post(this.apiUrl + "/api/cats/" + cat._id , {vote: userVote}, httpOptions)
    }
    
 }

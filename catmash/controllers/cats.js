@@ -18,33 +18,69 @@ module.exports = {
       return res.status(200).json(cats);
     });
   },
+  
+  getCatsUpdate : function(id) {
+    var userVotesCatIds = [];
 
-  updateCatList : function(req, res) {
-    var catIds = User.getCatsId;
+    return new Promise(resolve => {
+    User.findById(id, function(err, user) {
+      user["votedCats"].forEach(function(cat) {
+        userVotesCatIds.push(cat.idCat);
+      });
+      resolve(userVotesCatIds);
+      })
+    })
+  },
 
-    Cats.find({ id : { $nin: catIds } })
+  updateCatList : async function(req, res) {
+    var catIds = await module.exports.getCatsUpdate(req.user.id);
+
+    if (catIds.length > 0) {
+    Cats.find({ _id : { $nin: catIds } })
     .limit(30)
     .exec(function(err, cats) {
-      console.log(cats);
       return res.status(200).json({success: true, foundCats: cats});
     });
+  }
+    else {
+    Cats.find()
+    .limit(30)
+    .exec(function(err, cats) {
+      return res.status(200).json({success: true, foundCats: cats});
+    });
+    }
+
   },
 
   voteCat: function(req, res) {
     var idCat = req.params.id;
     var vote = req.body.vote;
 
+    User.update({'_id': req.user.id}, { 
+      $push: { 'votedCats':{ 'idCat': idCat, 'vote': vote }}},
+       function(err, value) {
+        if (err) {
+          throw(err);
+        }
+    });
+
     Cats.findById(idCat, function(err, cat) {
       if (err) {
         throw(err);
       }
       else if (vote === false) {
-        cat.vote.downVotes = cat.vote.downVotes + 1;
-        return res.status(200);
+        cat.votes.downvotes += 1;
+        cat.save(function(err, updatedCat) {
+          if (err) return handleError(err);
+          return res.status(200);
+        })
       }
       else {
-        cat.vote.downVotes = cat.vote.downVotes + 1;
-        return res.status(200);
+        cat.votes.upvotes += 1;
+        cat.save(function(err, updatedCat) {
+          if (err) return handleError(err);
+          return res.status(200);
+        })
       }
     });
   },
@@ -52,7 +88,6 @@ module.exports = {
   seedDb : async function (req, res) {
     var jsonData = await module.exports.fetchCats();
     var cats = [];
-    console.log("Ok très bien");
     jsonData.images.forEach(function(catObj) {
       var tempCat = new Cats();
       tempCat.imgUrl = catObj.url,
@@ -86,11 +121,8 @@ module.exports = {
           resolve(JsonResponse);
         });
     }).on('error', function(e){
-    console.log("Got an error: ", e);
+      throw(e);
     });  
     });
   }
 };
-
-
-

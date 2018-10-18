@@ -8,6 +8,7 @@ import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/di
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -20,8 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'vote', component: VoteCatsComponent },
-  { path: 'cats', component: ViewCatsComponent },
-  {path : 'test', component: ConnexionDialogComponent}
+  { path: 'cats', component: ViewCatsComponent }
 ];
 
 @NgModule({
@@ -47,7 +47,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule
   ],
   providers: [],
   entryComponents: [

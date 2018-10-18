@@ -1,7 +1,6 @@
 <mat-tab-group>
   <mat-tab label= "Connexion">
   <form [formGroup]="connexionForm" (ngSubmit)="connexionSubmit(connexionForm)">
-  <h1 mat-dialog-title>Se connecter</h1>
   <mat-dialog-content>
     <mat-form-field>
       <input matInput formControlName="username" placeholder="Username"  matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5>
@@ -19,7 +18,6 @@
 
 <mat-tab label="S'inscrire">
     <form [formGroup]="registerForm" (ngSubmit)="registerSubmit(registerForm)">
-    <h1 mat-dialog-title>S'inscrire</h1>
     <mat-dialog-content>
       <mat-form-field>
         <input matInput formControlName="username" placeholder="Username">

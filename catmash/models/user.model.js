@@ -31,12 +31,15 @@ var UserSchema = new Schema({
     type: String
   },
   votedCats: [{
-    vote: Boolean,
+    vote: {
+      type: Boolean,
+      required: true
+    },
     idCat : {
       type:  mongoose.Schema.Types.ObjectId,
       ref: 'cats',
+      required: true
     },
-    default: []
   }]
 });
 
@@ -59,6 +62,7 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+module.exports = mongoose.model('User', UserSchema);
 UserSchema.methods.comparePassword =  function (candidatePassword){
   let password = this.password;
   bcrypt.compare(candidatePassword, this.password, (err, success) => {
@@ -69,9 +73,11 @@ UserSchema.methods.comparePassword =  function (candidatePassword){
 }
 
 UserSchema.statics = {
+
+  //Get all the cats voted for everyone
   getCatsId: function() {
     var usersVotesCatId = [];
-    User.find({})
+    UserSchema.find({})
     .exec(function(err, users) {
       if (err) {
         throw(err);
@@ -100,4 +106,3 @@ UserSchema.statics = {
   }
 }
 
-module.exports = mongoose.model('User', UserSchema);
