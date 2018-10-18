@@ -12,12 +12,12 @@ module.exports = {
     var token;
     passport.authenticate('local-login', { session: false },
       function (err, user, info) {
-        if (!user) {
-          return res.status(401).json({
-            success: false,
-            message: "Wrong username or password"
-          });
-        }
+        // if (!user) {
+        //   return res.status(401).json({
+        //     success: false,
+        //     message: "Wrong username or password"
+        //   });
+        // }
          token = jwt.sign(user.email, configEnv.jwtSecret);
          return res.status(200).json({user, token});
       })(req, res, next);

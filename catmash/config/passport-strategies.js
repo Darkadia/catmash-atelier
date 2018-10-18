@@ -45,16 +45,17 @@ module.exports = function(passport) {
 					return done(false, null, 'Wrong username or wrong password');
 				}
 				bcrypt.compare(password, user.password, function(err, success)  {
-          if (err) {
-            console.log(err);
-          }
-          if (success == true) {
-						return done(null, user, 'User successfully logged');
-          }
-          else {
-              return done(null, false, { message: 'Incorrect username.' });
-          }
-        });
+					console.log("passed", success);
+					if (err) {
+						throw(err);
+					}
+					else if (success == true) {
+							return done(null, user, 'User successfully logged');
+					}
+					else {
+						return done(null, false, { message: 'Incorrect username.' });
+					}
+        		});
 			});
 		})),
 

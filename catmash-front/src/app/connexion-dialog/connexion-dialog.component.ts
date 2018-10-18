@@ -14,6 +14,9 @@ export class ConnexionDialogComponent implements OnInit {
 
   connexionForm: FormGroup;
   registerForm: FormGroup;
+  token : string;
+  username : string =  localStorage.getItem('username');
+  email: string = localStorage.getItem('email');
 
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ConnexionDialogComponent>,
@@ -30,7 +33,12 @@ export class ConnexionDialogComponent implements OnInit {
       password: '',
       email: ''
     })
-
+    this.token = localStorage.getItem("authToken");
+    if (this.token) {
+      this.username =  localStorage.getItem('username');
+      console.log(this.username);
+      this.email = localStorage.getItem('email');
+    }
   }
 
  getCircularReplacer = () => {
@@ -47,9 +55,13 @@ export class ConnexionDialogComponent implements OnInit {
   };
   
   connexionSubmit(form) {
+    console.log(form.value);
     this.connexionService.login(form.value)
     .subscribe(response => {
+      console.log(response);
       localStorage.setItem('authToken', response.token);
+      localStorage.setItem('username', response.user.username);
+      localStorage.setItem('email', response.user.email);
     });
     console.log("Token jwt " , localStorage.getItem("authToken"));
     this.dialogRef.close(`${form.value.username}`);
@@ -60,5 +72,9 @@ export class ConnexionDialogComponent implements OnInit {
     .subscribe(response => localStorage.setItem('authToken', response.token));
     console.log("Token jwt " , localStorage.getItem("authToken"));
     this.dialogRef.close(`${form.value.username}`);
+  }
+
+  disconnect() {
+    localStorage.clear();
   }
 }

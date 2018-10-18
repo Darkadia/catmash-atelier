@@ -1,3 +1,11 @@
-<p>
-  Salut, tu suces
-</p>
+<div style="text-align:center" class="catmashViewTotal" *ngFor="let cat of cats" >
+  <mat-card class="cat-card" style="text-align:center">
+    <img mat-card-image src={{cat.imgUrl}} alt="Photo of {{cat.id}}">
+    <div class="votes-row">
+      <mat-icon aria-label="Upvote Icon" color="primary">arrow_upward</mat-icon>
+      <span>{{cat.votes.upvotes}}</span>
+      <mat-icon aria-label="Downvote Icon" color="warn">arrow_downward</mat-icon>
+      <span>{{cat.votes.downvotes}}</span>
+    </div>
+  </mat-card>
+</div>

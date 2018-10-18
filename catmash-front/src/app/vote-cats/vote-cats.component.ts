@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cat } from '../classes/cat';
 import {MatDialog, MatDialogRef, MatDialogConfig} from "@angular/material";
+import {Overlay} from '@angular/cdk/overlay';
 import { ConnexionDialogComponent } from '../connexion-dialog/connexion-dialog.component';
 
 import { CatsService } from '../services/cats/cats.service';
@@ -15,12 +16,15 @@ export class VoteCatsComponent implements OnInit {
   selectedCat: Cat;
   cats: Cat[];
   i: number = 0;
+  token: string;
 
   connexionDialogRef: MatDialogRef<ConnexionDialogComponent>;
-  constructor(private catService:CatsService, private dialog: MatDialog) { }
+  constructor(private catService:CatsService, private dialog: MatDialog, private overlay: Overlay) { }
 
-  ngOnInit() { 
-    this.updateCats()
+  ngOnInit() {
+    this.token = localStorage.getItem("AuthToken");
+
+    this.updateCats();
   }
 
   updateCats(): void {
@@ -43,4 +47,14 @@ export class VoteCatsComponent implements OnInit {
       this.selectedCat = this.cats[this.i];
     }
   }
+
+  connexion() {
+    if (!this.token) {
+      this.dialog.open(ConnexionDialogComponent, {
+
+        scrollStrategy: this.overlay.scrollStrategies.noop()
+      });
+      hasBackdrop: true;
+    }
+  }    
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Cat } from '../classes/cat';
+import { CatsService } from '../services/cats/cats.service';
+
 
 @Component({
   selector: 'app-view-cats',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewCatsComponent implements OnInit {
 
-  constructor() { }
+  cats: Cat[];
+
+  constructor(private catService:CatsService) { }
 
   ngOnInit() {
+    this.getCats();
+  }
+
+  getCats(): void {
+    this.catService.getAllCats()
+    .subscribe(cats => {
+      console.log(cats);
+      this.cats = cats;
+
+    });
   }
 
 }

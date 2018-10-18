@@ -16,6 +16,18 @@ export class CatsService {
     this.http = http;
   }
   
+  getAllCats(): Observable<Cat[]> {
+    let authToken = localStorage.getItem('authToken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type':  'application/json',
+        'Authorization': `bearer ${authToken}`
+      })
+    };
+    return  this.http.get<Cat[]>(this.apiUrl + "/api/cats/list", httpOptions);
+  }
+
   getCats() : Observable<Cat[]>{
     let authToken = localStorage.getItem('authToken');
     const httpOptions = {

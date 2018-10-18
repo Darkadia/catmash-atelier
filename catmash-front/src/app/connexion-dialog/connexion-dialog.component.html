@@ -1,4 +1,20 @@
-<mat-tab-group>
+<div>
+<div *ngIf="token">
+  <mat-dialog-content>
+    <span>Votre nom d'utilisateur : {{username}}</span>
+    <br>
+    <span>Votre email : {{email}}</span>
+    
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close (click)="disconnect()">Se déconnecter</button>
+    <button mat-button type="button" mat-dialog-close>Fermer</button>
+  </mat-dialog-actions>
+ 
+</div>
+
+<div *ngIf="!token">
+  <mat-tab-group>
   <mat-tab label= "Connexion">
   <form [formGroup]="connexionForm" (ngSubmit)="connexionSubmit(connexionForm)">
   <mat-dialog-content>
@@ -36,4 +52,5 @@
     </form>
   </mat-tab>
 </mat-tab-group> 
-  
+</div>
+</div>

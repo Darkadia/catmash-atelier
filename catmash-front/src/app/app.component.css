@@ -1,3 +1,7 @@
+.catmashNav {
+    margin-bottom: 20px;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -5,11 +9,20 @@ ul {
     overflow: hidden;
     background-color: #333;
 }
-
+ul h1 {
+    vertical-align: middle;
+    max-height: 50px;
+    max-width: 160px;
+    color: white;
+    float: left;
+    margin-left: 20px;
+    margin-right: 10px;
+}
 ul img {
     vertical-align: middle;
-    max-height: 25px;
+    max-height: 50px;
     max-width: 160px;
+    margin-left: 20px;
 }
 ul button {
     display: inline-block;
