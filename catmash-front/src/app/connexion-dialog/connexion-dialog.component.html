@@ -4,13 +4,11 @@
     <span>Votre nom d'utilisateur : {{username}}</span>
     <br>
     <span>Votre email : {{email}}</span>
-    
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button type="button" mat-dialog-close (click)="disconnect()">Se déconnecter</button>
     <button mat-button type="button" mat-dialog-close>Fermer</button>
   </mat-dialog-actions>
- 
 </div>
 
 <div *ngIf="!token">

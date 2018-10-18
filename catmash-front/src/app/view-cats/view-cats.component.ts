@@ -21,9 +21,7 @@ export class ViewCatsComponent implements OnInit {
   getCats(): void {
     this.catService.getAllCats()
     .subscribe(cats => {
-      console.log(cats);
       this.cats = cats;
-
     });
   }
 

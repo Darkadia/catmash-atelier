@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatDialog, MatDialogRef, MatDialogConfig} from "@angular/material";
+import {MatDialog, MatDialogRef} from "@angular/material";
 import {Overlay} from '@angular/cdk/overlay';
 import { ConnexionDialogComponent } from './connexion-dialog/connexion-dialog.component';
 
