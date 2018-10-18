@@ -1,0 +1,16 @@
+{
+    "apps" : [
+      { 
+        "name": "catmash",
+        "script": "./bin/www",
+        "watch": true,
+        "secure": {
+            "USER": "catmashApplication",
+            "MDP": "catmash",
+            "AUTH": "?authMechanism=SCRAM-SHA-1",
+            "NODE_ENV": "production",
+            "PORT": "3000"
+        }
+      }
+  ]
+}

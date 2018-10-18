@@ -9,7 +9,9 @@ var glob = require('glob');
 module.exports = {
 
   initDb : function () {
-    mongoose.connect(config.db.localUri);
+    console.log(config.db.dbUri);
+    console.log(config.db.options);
+    mongoose.connect(config.db.dbUri, config.db.options);
     mongoose.Promise = global.Promise;
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
