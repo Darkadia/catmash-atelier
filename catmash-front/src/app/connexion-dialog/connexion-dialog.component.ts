@@ -12,9 +12,9 @@ export class ConnexionDialogComponent implements OnInit {
 
   connexionForm: FormGroup;
   registerForm: FormGroup;
-  token : string;
-  username : string;
-  email: string;;
+  token: string;
+  username: string;
+  email: string;
 
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ConnexionDialogComponent>,
@@ -25,32 +25,19 @@ export class ConnexionDialogComponent implements OnInit {
     this.connexionForm = this.formBuilder.group({
       username: '',
       password: ''
-    })
+    });
     this.registerForm = this.formBuilder.group({
       username: '',
       password: '',
       email: ''
-    })
-    this.token = localStorage.getItem("authToken");
+    });
+    this.token = localStorage.getItem('authToken');
     if (this.token) {
       this.username =  localStorage.getItem('username');
       this.email = localStorage.getItem('email');
     }
   }
 
- getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-      if (typeof value === "object" && value !== null) {
-        if (seen.has(value)) {
-          return;
-        }
-        seen.add(value);
-      }
-      return value;
-    };
-  };
-  
   connexionSubmit(form) {
     this.connexionService.login(form.value)
     .subscribe(response => {
