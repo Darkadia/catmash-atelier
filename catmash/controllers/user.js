@@ -1,9 +1,11 @@
 'use strict';
+const passport = require('passport'),
+      bodyParser = require('body-parser'),
+      configEnv = require('./../config/env/default.js'),
+      jwt = require('jsonwebtoken');
 
-var bodyParser = require('body-parser');
-const configEnv = require('./../config/assets/default');
-var Cats = require('../models/cats.model.js');
-var User = require('../models/user.model.js');
+var Cats = require('../models/cats.model.js'),
+    User = require('../models/user.model.js');
 
 module.exports = {
   login : function(req, res, next) {
@@ -16,16 +18,30 @@ module.exports = {
             message: "Wrong username or password"
           });
         }
-         token = jwt.sign(user.email, configEnv.jwt_secret);
-         return res.status(200).send({user, token});
+         token = jwt.sign(user.email, configEnv.jwtSecret);
+         return res.status(200).json({user, token});
       })(req, res, next);
   },
 
   register : function(req, res, next) {
     passport.authenticate('local-signup', {session: false},
       function(err, user, info) {
-        return res.status(201).send("User successfully created");
-    });
+        var token; 
+        if(err){
+          return res.status(401).json({
+            succes: false,
+            message: "Wront authentification"
+          })
+        }
+        else if (!user) {
+          return res.status(401).json({
+            success: false,
+            message: "Wrong username or password"
+          });
+        }
+        token = jwt.sign(user.email, configEnv.jwtSecret);
+        return res.status(200).json({user, token});
+    })(req, res, next);
   },
 
   disconnect: function (req, res) {

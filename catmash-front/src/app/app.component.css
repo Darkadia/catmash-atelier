@@ -12,6 +12,8 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .catmashNav nav img {
@@ -26,4 +28,12 @@
 .catmashNav h1 {
     display: inline;
     text-align: center;
+    margin: auto;
+}
+
+.catmashNav button {
+    float: right;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }

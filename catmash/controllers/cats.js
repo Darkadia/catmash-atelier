@@ -57,11 +57,11 @@ module.exports = {
       var tempCat = new Cats();
       tempCat.imgUrl = catObj.url,
       tempCat.id = catObj.id;
-      tempCat.upvotes = 0;
-      tempCat.downvotes = 0;
-      cats.push(tempCat);
+      tempCat.votes = {};
+      tempCat.votes.upvotes = 0;
+      tempCat.votes.downvotes = 0;
+     cats.push(tempCat);
     })
-    console.log("lenght of the json", cats.length);
     Cats.insertMany(cats).then((err, info) => {
       console.log("Cats updated in database");
     }).catch((err) => {

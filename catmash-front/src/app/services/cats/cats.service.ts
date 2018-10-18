@@ -16,7 +16,6 @@ export class CatsService {
     this.http = http;
 
   }
-
   
   getCats() : Observable<Cat[]>{
     let authToken = localStorage.getItem('token');
@@ -27,20 +26,19 @@ export class CatsService {
         'Authorization': `bearer ${authToken}`
       })
     };
-
     return  this.http.get<Cat[]>(this.apiUrl + "/api/cats/list", {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
    }
 
    voteCat(cat: Cat) : any {
-    //let authToken = localStorage.getItem('token');
+    let authToken = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json',
-        'Content-Type':  'application/json'
-        //'Authorization': `bearer ${authToken}`
+        'Content-Type':  'application/json',
+        'Authorization': `bearer ${authToken}`
       })
     };
-    console.log(this.apiUrl);
     return this.http.post<Cat>(this.apiUrl + "/api/cats/" + cat.id , cat, httpOptions)
    }
+   
 }

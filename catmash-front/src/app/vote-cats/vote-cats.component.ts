@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Cat } from '../classes/cat';
+import {MatDialog, MatDialogRef, MatDialogConfig} from "@angular/material";
+import { ConnexionDialogComponent } from '../connexion-dialog/connexion-dialog.component';
 
 import { CatsService } from '../services/cats/cats.service';
-// import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-vote-cats',
@@ -15,7 +16,8 @@ export class VoteCatsComponent implements OnInit {
   cats: Cat[];
   i: number = 0;
 
-  constructor(private catService:CatsService) { }
+  connexionDialogRef: MatDialogRef<ConnexionDialogComponent>;
+  constructor(private catService:CatsService, private dialog: MatDialog) { }
 
   ngOnInit() { 
     this.catService.getCats()
@@ -25,7 +27,7 @@ export class VoteCatsComponent implements OnInit {
     });
   }
 
-  onSelect(cat: Cat, vote: Boolean): void {
+  onSelect(vote: Boolean): void {
     this.catService.voteCat(this.selectedCat)
     .subscribe(response => console.log(response));
 

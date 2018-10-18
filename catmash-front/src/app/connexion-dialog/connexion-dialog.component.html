@@ -1,0 +1,41 @@
+<mat-tab-group>
+  <mat-tab label= "Connexion">
+  <form [formGroup]="connexionForm" (ngSubmit)="connexionSubmit(connexionForm)">
+  <h1 mat-dialog-title>Se connecter</h1>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput formControlName="username" placeholder="Username"  matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput formControlName="password" placeholder="Password"  matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=5>
+    </mat-form-field>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close>Fermer</button>
+    <button mat-button type="submit">Connexion</button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+</form>
+</mat-tab>
+
+<mat-tab label="S'inscrire">
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit(registerForm)">
+    <h1 mat-dialog-title>S'inscrire</h1>
+    <mat-dialog-content>
+      <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="password" matInput formControlName="password" placeholder="Password">
+      </mat-form-field>
+    <mat-form-field>
+      <input  matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+    <mat-dialog-actions>
+      <button mat-button type="button" mat-dialog-close>Annuler</button>
+      <button mat-button type="submit">S'inscrire</button>
+      </mat-dialog-actions>
+    </mat-dialog-content>
+    </form>
+  </mat-tab>
+</mat-tab-group> 
+  

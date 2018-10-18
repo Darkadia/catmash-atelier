@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	config = require("./env/default");
 
-const passportJWT = require("passport-jwt"),
+const  passportJWT = require("passport-jwt"),
         LocalStrategy = require('passport-local').Strategy,
    	    JWTStrategy = passportJWT.Strategy,
    	    ExtractJWT = passportJWT.ExtractJwt,
@@ -83,10 +83,10 @@ module.exports = function(passport) {
 				}
 
 				var newUser = new User({
-          username : req.body.username,
-          email : req.body.email,
-          password : req.body.password
-        });
+          			username : req.body.username,
+					email : req.body.email,
+					password : req.body.password
+				});
 				newUser.save(function(err) {
 					if (err){
 						throw err;

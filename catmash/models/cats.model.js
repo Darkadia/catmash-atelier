@@ -24,9 +24,15 @@ require('path').default;
      required: true
    },
    votes: {
-     upvotes: Number,
-     downvotes: Number
+     upvotes: {
+       type: Number,
+       required: true
+     },
+     downvotes: {
+       type: Number,
+       required: true
     }
+  }
  });
 
  var Cat =  mongoose.model('Cat', CatsSchema);

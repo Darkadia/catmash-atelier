@@ -27,10 +27,6 @@ var UserSchema = new Schema({
     type: String,
     require: true
   },
-  personnal: {
-    firstname: {type: String},
-    lastname: {type:String}
-  },
   libelle: {
     type: String
   },

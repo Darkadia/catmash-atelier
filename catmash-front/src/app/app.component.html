@@ -1,12 +1,17 @@
 <div style="text-align:left" class="catmashNav">
-    <img width="50" alt="Catmash Logo" src="https://image.flaticon.com/icons/svg/235/235349.svg">
+  <img width="25" alt="Catmash Logo" src="https://image.flaticon.com/icons/svg/235/235349.svg">
     <h1>
         {{ title }}!
     </h1>  
   <nav>
     <a routerLink="/cats" routerLinkActive="active">Cats</a>
     <a routerLink="/vote" routerLinkActive="active">Vote</a>
+    <a routerLink="/test" routerLinkActive="active">Test</a>
     </nav>
+    <button mat-raised-button (click)="openDialog()">Connexion</button>
+    <!-- si il n'y a rien dans le local storage en token, on open la modal contenant la connexion -->
 </div>
 
 <router-outlet></router-outlet>
+
+
