@@ -30,7 +30,6 @@ export class VoteCatsComponent implements OnInit {
   updateCats(): void {
     this.catService.getCats()
     .subscribe(cats => {
-      console.log(cats);
       this.cats = cats["foundCats"];
       this.selectedCat = this.cats[0];
     });
@@ -56,5 +55,14 @@ export class VoteCatsComponent implements OnInit {
       });
       hasBackdrop: true;
     }
-  }    
+  }
+  
+  checkLenght() {
+    if (this.cats.length == 0) {
+      return false;
+    }
+    else if (this.cats.length > 0) {
+        return true;
+    }
+  }
 }

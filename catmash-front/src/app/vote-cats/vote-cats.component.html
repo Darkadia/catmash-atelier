@@ -1,5 +1,5 @@
 <div>
-  <div style="text-align:center" class="catmashCard">
+  <div  style="text-align:center" class="catmashCard"  *ngIf="checkLenght()">
   <mat-card class="cat-card" style="text-align:center">
       <img mat-card-image *ngIf="selectedCat" src={{selectedCat?.imgUrl}} alt="Photo of {{selectedCat.id}}">
       <div class="buttons-row">
@@ -13,5 +13,8 @@
       </mat-card-actions>
       </div>
     </mat-card>
+  </div>
+  <div *ngIf="!checkLenght()">
+    <span>Il n'y a plus de chats pour qui voter</span>
   </div>
 </div>

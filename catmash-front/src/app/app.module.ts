@@ -21,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'vote', component: VoteCatsComponent },
-  { path: 'cats', component: ViewCatsComponent }
+  { path: 'cats', component: ViewCatsComponent },
+  { path: '', redirectTo: 'cats', pathMatch: 'full' },
 ];
 
 @NgModule({
